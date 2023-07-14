@@ -27,3 +27,8 @@ class UnauthorizedException extends AppException {
 class InvalidInputException extends AppException {
   InvalidInputException([String? message]) : super(message, "Invalid Request");
 }
+
+class ServerException extends AppException {
+  ServerException([String? message])
+      : super(message, "Internal Server Request");
+}
