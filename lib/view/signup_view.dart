@@ -1,24 +1,22 @@
-import 'package:flutter_mvvm/utils/routes/routes_name.dart';
-
 import '../utils/utils.dart';
 import '../utils/values/values.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../utils/routes/routes_name.dart';
 import '../res/components/buttons/buttons.dart';
 import '../res/components/forms/text_input_with _label.dart';
-import '../view_model/auth_view_model/login_view_model.dart';
+import '../view_model/auth_view_model/signup_view_model.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends StatefulWidget {
+  const SignupView({Key? key}) : super(key: key);
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignupView> createState() => _SignupViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  ValueNotifier<bool> obscureNotifier = ValueNotifier<bool>(true);
-
+class _SignupViewState extends State<SignupView> {
+  ValueNotifier<bool> obscureNotifier = ValueNotifier(true);
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
@@ -36,7 +34,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final loginViewModel = Provider.of<LoginViewModel>(context);
+    final signupViewModel = Provider.of<SignupViewModel>(context);
     return Scaffold(
       extendBody: false,
       resizeToAvoidBottomInset: false,
@@ -85,36 +83,36 @@ class _LoginViewState extends State<LoginView> {
                       })),
               AppSpaces.verticalSpace20,
               Button(
-                title: 'Login',
-                loading: loginViewModel.isLoading,
+                title: 'Signup',
+                loading: signupViewModel.isLoading,
                 onPress: () {
                   if (email.text.isEmpty) {
                     Utils.flushBar("Enter Email", context);
                   } else if (password.text.isEmpty) {
                     Utils.flushBar("Enter Password", context);
-                  } else if (password.text.length < 8) {
+                  } else if (password.text.length < 6) {
                     Utils.flushBar(
-                        "Password length should be less than 8", context);
+                        "Password length should be less than 6", context);
                   } else {
                     Map data = {
                       "email": email.text.toString(),
                       "password": password.text.toString()
                     };
-                    loginViewModel.loginApi(data, context);
+                    signupViewModel.signupApi(data, context);
                   }
                 },
               ),
               AppSpaces.verticalSpace10,
               RichText(
                 text: TextSpan(
-                  text: "Don't have an account",
+                  text: "Already have an account",
                   style: AppTextStyles.normalText,
                   children: <TextSpan>[
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () =>
-                            Navigator.pushNamed(context, RoutesName.signup),
-                      text: " Signup",
+                            Navigator.pushNamed(context, RoutesName.login),
+                      text: " Login",
                       style: AppTextStyles.boldText,
                     ),
                   ],
@@ -129,7 +127,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget title() {
     return Text(
-      'Login Screen',
+      'Signup Screen',
       style: AppTextStyles.titleText,
     );
   }

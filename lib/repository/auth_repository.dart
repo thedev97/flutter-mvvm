@@ -15,4 +15,13 @@ class AuthRepository {
       throw e;
     }
   }
+
+  Future<dynamic> signupApi(dynamic data) async{
+    try{
+      final response = _apiServices.postApiResponse(RemoteUrl.signupEndPoint, data);
+      return response;
+    }catch(e){
+      throw e;
+    }
+  }
 }

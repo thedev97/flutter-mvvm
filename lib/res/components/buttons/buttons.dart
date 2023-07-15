@@ -32,7 +32,7 @@ class Button extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    'Login',
+                    title,
                     style: AppTextStyles.normalText2,
                   ),
           )),

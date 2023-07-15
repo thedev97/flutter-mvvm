@@ -37,6 +37,15 @@ class AppTextStyles {
       ],
       color: Colors.white);
 
+  static final TextStyle boldText = GoogleFonts.lato(
+      fontWeight: FontWeight.w500,
+      fontSize: 12,
+      shadows: [
+        const Shadow(
+            color: Colors.black, offset: Offset(0.0, 0.5), blurRadius: 0.5),
+      ],
+      color: Colors.black);
+
   static final labelText = GoogleFonts.lato(shadows: [
     const Shadow(
         color: Colors.black,
